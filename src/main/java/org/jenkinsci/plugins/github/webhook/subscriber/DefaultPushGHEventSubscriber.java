@@ -75,7 +75,8 @@ public class DefaultPushGHEventSubscriber extends GHEventsSubscriber {
         }
         URL repoUrl = push.getRepository().getUrl();
         final String pusherName = push.getPusher().getName();
-        LOGGER.info("Received PushEvent for {} from {}", repoUrl, event.getOrigin());
+        final String pusherRef = push.getRef();
+        LOGGER.info("Received PushEvent for {} with Ref {} from {}", repoUrl, pusherRef, event.getOrigin());
         final GitHubRepositoryName changedRepository = GitHubRepositoryName.create(repoUrl.toExternalForm());
 
         if (changedRepository != null) {
