@@ -92,7 +92,8 @@ public class DefaultPushGHEventSubscriber extends GHEventsSubscriber {
                             String fullDisplayName = job.getFullDisplayName();
                             LOGGER.debug("Considering to poke {}", fullDisplayName);
                             if (GitHubRepositoryNameContributor.parseAssociatedNames(job)
-                                    .contains(changedRepository)) {
+                                    .contains(changedRepository)
+                                    .contains(pusherRef)) {
                                 LOGGER.info("Poked {}", fullDisplayName);
                                 trigger.onPost(GitHubTriggerEvent.create()
                                         .withTimestamp(event.getTimestamp())
